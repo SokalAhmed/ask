@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soulmate Proposal</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f5f5f5;
+            transition: background-color 0.5s;
+        }
+
+        .card {
+            width: 320px;
+            padding: 30px;
+            background-color: #f44336;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(244, 67, 54, 0.4);
+            text-align: center;
+            transition: all 0.5s ease;
+        }
+
+        h1 {
+            color: white;
+            margin-bottom: 30px;
+            font-size: 24px;
+            transition: all 0.3s;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            position: relative;
+            overflow: hidden;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            background-color: white;
+            color: #f44336;
+            font-weight: bold;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.3s;
+            min-width: 80px;
+        }
+
+        button:hover {
+            background-color: #ffebee;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(244, 67, 54, 0.3);
+        }
+
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(244, 67, 54, 0.4);
+            transform: scale(0);
+            animation: ripple 0.6s linear;
+            pointer-events: none;
+        }
+           #yesBtn {
+        color:#4caf50;
+        }
+
+        @keyframes ripple {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .space-for-yes {
+            height: 50px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1 id="question">Wanna be my soulmate?</h1>
+        <div class="button-container">
+            <button id="noBtn">No</button>
+            <button id="neverBtn">Never</button>
+        </div>
+        <div class="space-for-yes">
+            <button id="yesBtn" class="hidden">Yes</button>
+        </div>
+    </div>
+
+    <script>
+        // Add ripple effect to buttons with red tint
+        function createRipple(event) {
+            const button = event.currentTarget;
+            const circle = document.createElement("span");
+            const diameter = Math.max(button.clientWidth, button.clientHeight);
+            const radius = diameter / 2;
+
+            circle.style.width = circle.style.height = `${diameter}px`;
+            circle.style.left = `${event.clientX - button.getBoundingClientRect().left - radius}px`;
+            circle.style.top = `${event.clientY - button.getBoundingClientRect().top - radius}px`;
+            circle.classList.add("ripple");
+
+            const ripple = button.getElementsByClassName("ripple")[0];
+            if (ripple) {
+                ripple.remove();
+            }
+
+            button.appendChild(circle);
+        }
+
+        // Initialize buttons
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const neverBtn = document.getElementById('neverBtn');
+        const question = document.getElementById('question');
+        const card = document.querySelector('.card');
+
+        // Add ripple effects to all buttons
+        const buttons = document.querySelectorAll('button');
+        buttons.forEach(button => {
+            button.addEventListener('click', createRipple);
+        });
+
+        // Button functionality
+        noBtn.addEventListener('click', () => {
+            card.style.backgroundColor = '#000';
+            card.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.4)';
+            question.textContent = 'Wanna be my soulmate 💔';
+            yesBtn.classList.remove('hidden');
+        });
+
+        neverBtn.addEventListener('click', () => {
+            document.body.style.backgroundColor = '#000';
+            card.style.backgroundColor = '#000';
+            card.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.4)';
+            question.textContent = 'Wanna be my soulmate 🥺';
+            yesBtn.classList.remove('hidden');
+        });
+
+        yesBtn.addEventListener('click', () => {
+            window.location.href = 'heart.html';
+        });
+    </script>
+</body>
+</html>
