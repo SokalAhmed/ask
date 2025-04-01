@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>বাস্তবতা</title>
+    <style>
+        body {
+            font-family: 'SolaimanLipi', 'Bangla', Arial, sans-serif;
+            /* background-color: #f0f2f5;*/
+            background-color: #121212;  /* Dark gray instead of pure white */
+            /* background-color: #fff0f0; */  /* creamy */
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            font-weight:400;
+            /* line-height: 1.6;
+            color: #333333; */
+            color: #f0f0f0;  /* soft white pure black */
+            /* color: #663333; */  /* brown red */
+            line-height: 1.8;  /* More spacing between lines */ 
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 600px;
+            /* background: white; */
+            background-color: #1e1e1e;  /* lighter dark background */
+            /* background-color: #ffecec; */  /* creamy white */
+            padding: 25px;
+            border-radius: 8px;
+            /* box-shadow: 0 2px 10px rgba(0,0,0,0.1); */
+            box-shadow: 0 2px 15px rgba(0,0,0,0.3); /* Softer shadow */
+            border: 1px solid #333;
+            /* border: 1px solid #f8d8d8; */ /* light pink border */ 
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="text-container"></div>
+
+    <script>
+        // ===== EDIT THIS TEXT ONLY ===== //
+        const paragraph = `
+**3 Reasons Why I Like You** 
+
+1. **CSE - My Unfinished Dream**  
+   You represent the computer science aspirations I couldn't pursue, making you special in a way that connects to my unrealized goals.  
+
+2. **Anime - Childhood Nostalgia**  
+   While *Ben 10* isn't technically anime, it holds nostalgic value from my childhood. Sharing this interest with you makes it even more meaningful.  
+
+3. **Most Importantly... You're Kawaii!**  
+   On top of everything else, you're incredibly "kawaii" (かわいい)—and that just makes you even more wonderful. 💖 `.trim().replace(/\n{2,}/g, '<br><br>').replace(/\n/g, ' ');
+        // ===== END EDITABLE SECTION ===== //
+
+        // Display the text with typing effect
+        const container = document.getElementById('text-container');
+        const typingSpeed = 10;
+        let currentPosition = 0;
+
+        function typeWriter() {
+            if (currentPosition < paragraph.length) {
+                if (paragraph.substr(currentPosition, 4) === '<br>') {
+                    container.innerHTML += '<br>';
+                    currentPosition += 4;
+                } else {
+                    container.innerHTML += paragraph.charAt(currentPosition);
+                    currentPosition++;
+                }
+                setTimeout(typeWriter, typingSpeed);
+            }
+        }
+
+        window.onload = () => {
+            container.innerHTML = '';
+            typeWriter();
+        };
+    </script>
+</body>
+</html>
